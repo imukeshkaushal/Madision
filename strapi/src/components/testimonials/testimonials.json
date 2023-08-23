@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_testimonials_testimonials",
+  "info": {
+    "displayName": "Testimonials",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "icon_text": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "designation_title": {
+      "type": "string"
+    },
+    "designation_desc": {
+      "type": "string"
+    }
+  }
+}

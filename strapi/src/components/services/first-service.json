@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_services_first_services",
+  "info": {
+    "displayName": "first_service",
+    "icon": "arrowDown",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "first_title": {
+      "type": "string"
+    },
+    "bg_img": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "first_desc": {
+      "type": "richtext"
+    }
+  }
+}

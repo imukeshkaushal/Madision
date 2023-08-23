@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_story_stories",
+  "info": {
+    "displayName": "Story",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Title_1": {
+      "type": "string"
+    },
+    "Title_2": {
+      "type": "string"
+    },
+    "Button": {
+      "type": "string"
+    },
+    "Discription_1": {
+      "type": "richtext"
+    },
+    "Discription_2": {
+      "type": "richtext"
+    }
+  }
+}

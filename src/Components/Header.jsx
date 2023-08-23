@@ -36,11 +36,11 @@ export default function Header() {
         color={useColorModeValue('gray.600', 'white')}
         minH={'100px'}
         py={{ base: 2 }}
-        px={{ base: 16 }}
+        px={[4,8,16]}
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
-        justifyContent={"space-evenly"}
+        justifyContent={"space-between"}
         align={'center'}>
         
         <Flex
@@ -60,7 +60,7 @@ export default function Header() {
             color={useColorModeValue('gray.800', 'white')}>
             <Image w={"120px"} height = {"50px"} src = "https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/logo-1.png" alt="logo"/>
         </Text>
-        <Flex flex={{ base: 1 }} justify={"center"} alignItems={"center"} >
+        <Flex  justify={"center"} alignItems={"center"} >
           
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10} >
@@ -72,6 +72,7 @@ export default function Header() {
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
+          display={["none","none","inline-block"]}
           spacing={6}>
           <Link to= {'/contact'}>
           <Button
@@ -81,7 +82,9 @@ export default function Header() {
             color={'white'}
             bg={'#051F16'}
             borderRadius ={"none"}
-            padding = {"15px 30px"}
+            pl={8}
+            pr={8}
+            display={["none","none","inline-block"]}
             
             _hover={{
               bg: 'white',
