@@ -67,7 +67,7 @@ export default function Carousel() {
   ]
 
   return (
-    <Box position={'relative'} height={'600px'} width={'full'} overflow={'hidden'}>
+    <Box position={'relative'} height={'600px'} width={'full'} overflow={'hidden'} backgroundColor={"white"}>
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"

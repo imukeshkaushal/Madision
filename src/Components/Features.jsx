@@ -1,30 +1,43 @@
-import { Box, Flex, Image, Text} from '@chakra-ui/react'
-import React from 'react'
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const Features = () => {
+  const [apiData, setApiData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:1337/api/home?populate=Features.image')
+      .then((response) => {
+        setApiData(response.data.data.attributes);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
+
   return (
     <div>
-        <Box mt={16} display={"grid"} gridTemplateColumns={["repeat(1,1fr)","repeat(2,1fr)","repeat(3,1fr)","repeat(4,1fr)"]} alignItems={"center"} justifyContent={"center"} gap={16}>
-            <Flex direction={"column"} gap={8} alignItems={"center"} justifyContent={"center"}>
-                <Image maxW={"120px"} src='https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/Group-560.png' alt='exp'/>
-                <Text  fontWeight={"500"}>25 YEARS OF EXPERIENCE</Text>
+      <Box
+        mt={16}
+        display={'grid'}
+        gridTemplateColumns={['repeat(1,1fr)', 'repeat(2,1fr)', 'repeat(3,1fr)', 'repeat(4,1fr)']}
+        alignItems={'center'}
+        justifyContent={'center'}
+        gap={16}
+      >
+        {apiData &&
+          apiData.Features.map((feature, index) => (
+            <Flex key={index} direction={'column'} gap={8} alignItems={'center'} justifyContent={'center'}>
+              <Image maxW={'120px'} src={`http://localhost:1337${feature.image.data.attributes.url}`} alt={feature.Title} />
+              <Text fontWeight={'500'}>{feature.Title}</Text>
             </Flex>
-            <Flex direction={"column"} gap={8} alignItems={"center"} justifyContent={"center"}>
-                <Image maxW={"120px"} src='https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/Group-559.png' alt='exp'/>
-                <Text  fontWeight={"500"}>TEAM OF SKILLED PROFESSIONALS</Text>
-            </Flex>
-            <Flex direction={"column"} gap={8} alignItems={"center"} justifyContent={"center"}>
-                <Image maxW={"120px"} src='https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/Group-558.png' alt='exp'/>
-                <Text  fontWeight={"500"}>VARIETY OF VEHICLES AND BRANDS</Text>
-            </Flex>
-            <Flex direction={"column"} gap={8} alignItems={"center"} justifyContent={"center"}>
-                <Image maxW={"120px"} src='https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/Group-557.png' alt='exp'/>
-                <Text  fontWeight={"500"}>COMPITATIVE RATES</Text>
-            </Flex>
-
-        </Box>
+          ))}
+      </Box>
     </div>
-  )
-}
+  );
+};
 
-export default Features
+export default Features;

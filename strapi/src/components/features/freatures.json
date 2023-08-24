@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_features_freatures",
+  "info": {
+    "displayName": "Freatures",
+    "icon": "bell"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Title": {
+      "type": "string"
+    }
+  }
+}

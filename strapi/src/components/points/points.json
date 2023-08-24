@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_points_points",
+  "info": {
+    "displayName": "Points",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "list_title": {
+      "type": "text"
+    }
+  }
+}

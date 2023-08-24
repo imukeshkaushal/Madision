@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_consultation_consultations",
+  "info": {
+    "displayName": "Consultation",
+    "icon": "check"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "consultation_title1": {
+      "type": "text"
+    },
+    "bg_img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Points": {
+      "displayName": "Points",
+      "type": "component",
+      "repeatable": true,
+      "component": "points.points"
+    }
+  }
+}

@@ -41,6 +41,35 @@
       "type": "component",
       "repeatable": true,
       "component": "testimonials.testimonials"
+    },
+    "Features": {
+      "displayName": "Freatures",
+      "type": "component",
+      "repeatable": true,
+      "component": "features.freatures"
+    },
+    "testimonial_title1": {
+      "type": "string"
+    },
+    "testimonial_title2": {
+      "type": "string"
+    },
+    "feature_title1": {
+      "type": "string"
+    },
+    "feature_title2": {
+      "type": "string"
+    },
+    "Consultation": {
+      "type": "component",
+      "repeatable": false,
+      "component": "consultation.consultation"
+    },
+    "Customization": {
+      "displayName": "Customization",
+      "type": "component",
+      "repeatable": false,
+      "component": "customization.customization"
     }
   }
 }
