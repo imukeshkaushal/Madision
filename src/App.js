@@ -3,6 +3,7 @@ import './App.css';
 import Header from './Components/Header';
 import * as React from "react"
 import AllRoutes from './Routers/AllRoutes';
+import Footer from './Components/Footer';
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
       <header>
         <Header/>
         <AllRoutes/>
-      
+        <Footer/>
       </header>
     </div>
   );

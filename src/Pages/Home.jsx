@@ -6,6 +6,7 @@ import Features from "../Components/Features";
 import Testimonails from "../Components/Testimonails";
 import axios from "axios";
 import Consultation from "../Components/Consultation";
+import Customization from "../Components/Customization";
 
 const Home = () => {
   const [apiData, setApiData] = useState(null);
@@ -297,6 +298,7 @@ const Home = () => {
           </Box>
           </Box>
           <Consultation/>
+          <Customization/>
         </>
       )}
     </Box>

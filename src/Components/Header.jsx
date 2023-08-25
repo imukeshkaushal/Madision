@@ -23,10 +23,27 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 
 export default function Header() {
+  const [apiData, setApiData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:1337/api/home?populate=Consultation.Points,Consultation.bg_img')
+      .then((response) => {
+        setApiData(response.data.data.attributes.Consultation);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  const backgroundImageUrl = apiData?.bg_img?.data?.attributes?.url || '';
+
   const { isOpen, onToggle } = useDisclosure()
 
   return (

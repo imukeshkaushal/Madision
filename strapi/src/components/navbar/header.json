@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_navbar_headers",
+  "info": {
+    "displayName": "Header",
+    "icon": "folder",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "NAV_ITEMS": {
+      "displayName": "Menus",
+      "type": "component",
+      "repeatable": true,
+      "component": "menus.menus"
+    },
+    "Button": {
+      "type": "string"
+    },
+    "button_link": {
+      "type": "string"
+    }
+  }
+}
