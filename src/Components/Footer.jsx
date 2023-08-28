@@ -1,145 +1,91 @@
-'use client'
+import { ChevronRightIcon } from '@chakra-ui/icons'
+import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import {
-  Box,
-  chakra,
-  Container,
-  SimpleGrid,
-  Stack,
-  Text,
-  VisuallyHidden,
-  Input,
-  IconButton,
-  useColorModeValue,
-  Image,
-} from '@chakra-ui/react'
+const Footer = () => {
+  const [apiData, setApiData] = useState(null);
 
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
-import { BiMailSend } from 'react-icons/bi'
-
-
-
-const SocialButton = ({
-  children,
-  label,
-  href,
-}) => {
+  useEffect(() => {
+    axios
+      .get('http://localhost:1337/api/home?populate=footer.menu_1_list,footer.menu_2_list,footer.social_links.logo,footer.contact_links.icon,footer.logo')
+      .then((response) => {
+        setApiData(response.data.data.attributes.footer);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+  console.log(apiData);
+  const logo = apiData && apiData.logo.data.attributes.url
   return (
-    <chakra.button
-      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-      rounded={'full'}
-      w={8}
-      h={8}
-      cursor={'pointer'}
-      as={'a'}
-      href={href}
-      display={'inline-flex'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      transition={'background 0.3s ease'}
-      _hover={{
-        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
-      }}>
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  )
-}
-
-const ListHeader = ({ children }) => {
-  return (
-    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
-      {children}
-    </Text>
-  )
-}
-
-export default function Footer() {
-  return (
-    <Box
-      bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}>
-      <Container as={Stack} maxW={'8xl'} py={10}>
-        <SimpleGrid
-          templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 2fr' }}
-          spacing={8}>
-          <Stack spacing={6}>
-            <Box>
-              <Image src='https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/logo-1.png' alt='logo'/>
-            </Box>
-            <Text fontSize={'sm'}>© 2022 Chakra Templates. All rights reserved</Text>
-            <Stack direction={'row'} spacing={6}>
-              <SocialButton label={'Twitter'} href={'#'}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={'YouTube'} href={'#'}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={'Instagram'} href={'#'}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Company</ListHeader>
-            <Box as="a" href={'#'}>
-              About us
-            </Box>
-            <Box as="a" href={'#'}>
-              Blog
-            </Box>
-            <Box as="a" href={'#'}>
-              Contact us
-            </Box>
-            <Box as="a" href={'#'}>
-              Pricing
-            </Box>
-            <Box as="a" href={'#'}>
-              Testimonials
-            </Box>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Support</ListHeader>
-            <Box as="a" href={'#'}>
-              Help Center
-            </Box>
-            <Box as="a" href={'#'}>
-              Terms of Service
-            </Box>
-            <Box as="a" href={'#'}>
-              Legal
-            </Box>
-            <Box as="a" href={'#'}>
-              Privacy Policy
-            </Box>
-            <Box as="a" href={'#'}>
-              Satus
-            </Box>
-          </Stack>
-          <Stack align={'flex-start'}>
-            <ListHeader>Stay up to date</ListHeader>
-            <Stack direction={'row'}>
-              <Input
-                placeholder={'Your email address'}
-                bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
-                border={0}
-                _focus={{
-                  bg: 'whiteAlpha.300',
-                }}
-              />
-              <IconButton
-                bg={useColorModeValue('green.400', 'green.800')}
-                color={useColorModeValue('white', 'gray.800')}
-                _hover={{
-                  bg: 'green.600',
-                }}
-                aria-label="Subscribe"
-                icon={<BiMailSend />}
-              />
-            </Stack>
-          </Stack>
-        </SimpleGrid>
-      </Container>
+    <footer className="footer-wrapper">
+      <Box backgroundColor={"#051F16"}>
+        <Box display={"grid"} gridTemplateColumns={["repeat(1,1fr)","repeat(2,1fr)","repeat(3,1fr)","repeat(4,1fr)"]}  gap={16} py={12} pt={20} fontSize={"18px"} w={"90%"} m={"auto"}>
+        <Box>
+          <Image src={`http://localhost:1337${logo}`} alt='logo'/>
+          <Text color={"white"} fontWeight={"300"}>{apiData && apiData.footer_desc}</Text>
+        </Box>
+        <Box>
+          <Text color={"white"} fontSize={"18px"}>{apiData && apiData.menu_1_title}</Text>
+          <Flex mt={8} direction={"column"} gap={4}>
+          {apiData && apiData.menu_1_list.map((el) => {
+            return(
+              <Flex color={"white"} fontWeight={"300"} alignItems={"center"} gap={"5px"} key={el.id}>
+              <ChevronRightIcon/>
+              <Text>{el.menu_name}</Text>
+            </Flex>
+            )
+          })}
+          </Flex>
+        </Box>
+        <Box>
+          <Text color={"white"} fontSize={"18px"}>{apiData && apiData.menu_2_title}</Text>
+          <Flex mt={8} direction={"column"} gap={4}>
+          {apiData && apiData.menu_2_list.map((el) => {
+            return(
+              <Flex color={"white"} fontWeight={"300"} alignItems={"center"} gap={"5px"} key={el.id}>
+              <ChevronRightIcon/>
+              <Text>{el.menu_name}</Text>
+            </Flex>
+            )
+          })}
+          
+          </Flex>
+        </Box>
+        <Box>
+          <Text color={"white"} fontSize={"18px"}>{apiData && apiData.menu_3_title}</Text>
+          <Flex mt={8} gap={4}>
+          {
+            apiData && apiData.social_links.map((el) => {
+              return(
+                <Box key={el.id}>
+                <Link to={el && el.link}><Image w={"35px"} h={"35px"} src={`http://localhost:1337${el && el.logo.data.attributes.url}`} alt='logo'/> </Link>
+                </Box>
+              )
+            })
+          }
+            
+          </Flex>
+          {apiData && apiData.contact_links.map((el) => {
+            return(
+              <Flex mt={8} gap={4} alignItems={"center"}>
+            <Image w={"30px"} h={"30px"} src={`http://localhost:1337${el && el.icon.data.attributes.url}`} alt='icons'/>
+            <Text color={"white"} fontWeight={"300"}>{el && el.text}</Text>
+          </Flex>
+            )
+          })}
+          
+        </Box>
+      </Box>
+      <hr/>
+      <Box>
+        <Text color={"white"} fontWeight={"300"} textAlign={"center"} p={2}>{apiData && apiData.copyright}</Text>
+      </Box>
     </Box>
+    </footer>
   )
 }
+
+export default Footer

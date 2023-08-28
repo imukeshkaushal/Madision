@@ -71,10 +71,17 @@
       "repeatable": false,
       "component": "customization.customization"
     },
-    "Navbar": {
+    "slider": {
+      "displayName": "Carasoul",
+      "type": "component",
+      "repeatable": true,
+      "component": "carasoul.carasoul"
+    },
+    "footer": {
+      "displayName": "Footer",
       "type": "component",
       "repeatable": false,
-      "component": "navbar.header"
+      "component": "footer.footer"
     }
   }
 }

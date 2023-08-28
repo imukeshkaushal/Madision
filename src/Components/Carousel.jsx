@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Box,
   IconButton,
@@ -13,6 +13,7 @@ import {
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi'
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick'
+import axios from 'axios'
 
 // Settings for the slider
 const settings = {
@@ -28,6 +29,21 @@ const settings = {
 }
 
 export default function Carousel() {
+  const [apiData, setApiData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:1337/api/home?populate=slider.image')
+      .then((response) => {
+        setApiData(response.data.data.attributes.slider);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
+  // const backgroundImageUrl = apiData?.bg_img?.data?.attributes?.url || '';
   // As we have used custom buttons, we need a reference variable to
   // change the state
   const [slider, setSlider] = useState("");
@@ -39,32 +55,7 @@ export default function Carousel() {
 
   // This list contains all the data for carousels
   // This can be static or loaded from a server
-  const cards = [
-    {
-      title: 'SECURED ARMORED VEHICLE',
-      text: "PROVIDING DESCRETE AND SECURE ARMORED VEHICLE AND SERVICES",
-      image:
-        'https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-2-1.png',
-    },
-    {
-      title: 'LUXURT ARMORED TRANSPORTATION',
-      text: "UNPARALLED SERVICES AND PRODUCT TO AN ULTRA DISCRIMANTING AUDIANCE",
-      image:
-        'https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/Slider-2-Blank-1.jpg',
-    },
-    {
-      title: 'ULTIMATE BESPOKE ARMORED VEHICLE EXPERIENCE',
-      text: "COMMITMENT TO INNOVATION, CRAFTSMANSHIP, SECURITY EXPERTISE AND TRUSTED PARTNERSHIPS WITH EACH AND EVERY CUSTOMER",
-      image:
-        'https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/Slider-3-Blank-1.jpg',
-    },
-    {
-        title: 'NEW YORKS LUXURY ARMORED TRANSPORTATION',
-        text: "LUXURY ARMORED TRANSPORTATION AND PROTECTION BUSINESS AND AN INDUSTRY LEADING PERFECT SAFETY RECORD!",
-        image:
-          'https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/Slider-4-Blank-1.jpg',
-    },
-  ]
+  
 
   return (
     <Box position={'relative'} height={'600px'} width={'full'} overflow={'hidden'} backgroundColor={"white"}>
@@ -105,7 +96,8 @@ export default function Carousel() {
       </IconButton>
       {/* Slider */}
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
-        {cards.map((card, index) => (
+      {apiData !== null ? (
+        apiData.map((card, index) => (
           <Box
             key={index}
             height={'xl'}
@@ -113,28 +105,30 @@ export default function Carousel() {
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
-            backgroundImage={`url(${card.image})`}>
-            {/* This is the block you need to change, to customize the caption */}
-            <Container  size="container.lg" height="600px" position="relative"  m={0}>
+            backgroundImage={`url(http://localhost:1337${card.image.data.attributes.url})`}>
+            <Container size="container.lg" height="600px" position="relative" m={0}>
               <Stack
                 spacing={6}
                 w={'full'}
                 maxW={'sm'}
-               
                 position="relative"
                 top="50%"
-                left = {["2%","10%","20%"]}
+                left={["2%", "10%", "20%"]}
                 transform="translate(0, -50%)">
-                <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} color = {"white"}>
+                <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} color={"white"}>
                   {card.title}
                 </Heading>
-                <Text fontSize={{ base: 'md', lg: 'lg' }} color="white" >
+                <Text fontSize={{ base: 'md', lg: 'lg' }} color="white">
                   {card.text}
                 </Text>
               </Stack>
             </Container>
           </Box>
-        ))}
+        ))
+      ) : (
+        // You can add a loading state or an empty state message here
+        <p>Loading...</p>
+      )}
       </Slider>
     </Box>
   )

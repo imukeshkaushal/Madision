@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_menu_2_list_menu_2_lists",
+  "info": {
+    "displayName": "menu_2_list",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "menu_name": {
+      "type": "string"
+    },
+    "menu_link": {
+      "type": "string"
+    }
+  }
+}
