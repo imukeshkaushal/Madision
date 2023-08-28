@@ -8,16 +8,18 @@ const Consultation = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:1337/api/home?populate=Consultation.Points,Consultation.bg_img')
+      .get(
+        "http://localhost:1337/api/home?populate=Consultation.Points,Consultation.bg_img"
+      )
       .then((response) => {
         setApiData(response.data.data.attributes.Consultation);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       });
   }, []);
 
-  const backgroundImageUrl = apiData?.bg_img?.data?.attributes?.url || '';
+  const backgroundImageUrl = apiData?.bg_img?.data?.attributes?.url || "";
 
   return (
     <Box position="relative">
@@ -32,19 +34,21 @@ const Consultation = () => {
           backgroundPosition="bottom center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
-          style={{ backgroundImage: `url(http://localhost:1337${backgroundImageUrl})` }}
+          style={{
+            backgroundImage: `url(http://localhost:1337${backgroundImageUrl})`,
+          }}
         />
       )}
 
       <Box
-        height={["1650px","1300px","800px","800px","800px"]}
-        width={["100%","100%","55%"]} 
-        ml={["none","none","45%"]}
-        p={4} 
+        height={["1650px", "1300px", "800px", "800px", "800px"]}
+        width={["100%", "100%", "55%"]}
+        ml={["none", "none", "45%"]}
+        p={4}
       >
         <Box
           border={"10px solid #E7E7E7"}
-          m={[0,0,8]}
+          m={[0, 0, 8]}
           p={8}
           backgroundColor={"#051F16"}
           opacity={0.9}

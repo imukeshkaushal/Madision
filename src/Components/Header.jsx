@@ -1,4 +1,3 @@
-
 import {
   Box,
   Flex,
@@ -15,103 +14,91 @@ import {
   useBreakpointValue,
   useDisclosure,
   Image,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 import {
   HamburgerIcon,
   CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@chakra-ui/icons'
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-
+} from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 export default function Header() {
-  const [apiData, setApiData] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:1337/api/home?populate=Consultation.Points,Consultation.bg_img')
-      .then((response) => {
-        setApiData(response.data.data.attributes.Consultation);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  const backgroundImageUrl = apiData?.bg_img?.data?.attributes?.url || '';
-
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'100px'}
+        bg={useColorModeValue("white", "gray.800")}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"100px"}
         py={{ base: 2 }}
-        px={[4,8,16]}
+        px={[4, 8, 16]}
         borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
         justifyContent={"space-between"}
-        align={'center'}>
-        
+        align={"center"}
+      >
         <Flex
-          flex={{ base: 1, md: 'auto' }}
+          flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
+          display={{ base: "flex", md: "none" }}
+        >
           <IconButton
             onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
+            icon={
+              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+            }
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
           />
         </Flex>
         <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'center' })}
-            fontFamily={'heading'}
-            color={useColorModeValue('gray.800', 'white')}>
-            <Image w={"120px"} height = {"50px"} src = "https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/logo-1.png" alt="logo"/>
+          textAlign={useBreakpointValue({ base: "center", md: "center" })}
+          fontFamily={"heading"}
+          color={useColorModeValue("gray.800", "white")}
+        >
+          <Image
+            w={"120px"}
+            height={"50px"}
+            src="https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/logo-1.png"
+            alt="logo"
+          />
         </Text>
-        <Flex  justify={"center"} alignItems={"center"} >
-          
-
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10} >
+        <Flex justify={"center"} alignItems={"center"}>
+          <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
 
         <Stack
           flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          display={["none","none","inline-block"]}
-          spacing={6}>
-          <Link to= {'/contact'}>
-          <Button
-            
-            fontSize={'18px'}
-            fontWeight={400}
-            color={'white'}
-            bg={'#051F16'}
-            borderRadius ={"none"}
-            pl={8}
-            pr={8}
-            display={["none","none","inline-block"]}
-            
-            _hover={{
-              bg: 'white',
-              color : "black",
-              border : "1px solid black",
-            }}>
-            CONTACT US
-          </Button>
+          justify={"flex-end"}
+          direction={"row"}
+          display={["none", "none", "inline-block"]}
+          spacing={6}
+        >
+          <Link to={"/contact"}>
+            <Button
+              fontSize={"18px"}
+              fontWeight={400}
+              color={"white"}
+              bg={"#051F16"}
+              borderRadius={"none"}
+              pl={8}
+              pr={8}
+              display={["none", "none", "inline-block"]}
+              _hover={{
+                bg: "white",
+                color: "black",
+                border: "1px solid black",
+              }}
+            >
+              CONTACT US
+            </Button>
           </Link>
-          
         </Stack>
       </Flex>
 
@@ -119,48 +106,47 @@ export default function Header() {
         <MobileNav />
       </Collapse>
     </Box>
-  )
+  );
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+  const linkColor = useColorModeValue("gray.600", "gray.200");
+  const linkHoverColor = useColorModeValue("gray.800", "white");
+  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={'row'} spacing={4}>
+    <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
+          <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
-            <Link to= {navItem.href ?? '#'}>
-            
-              <Box
-                
-                p={2}
-
-                fontSize={'18px'}
-                fontWeight={400}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Box>
+              <Link to={navItem.href ?? "#"}>
+                <Box
+                  p={2}
+                  fontSize={"18px"}
+                  fontWeight={400}
+                  color={linkColor}
+                  _hover={{
+                    textDecoration: "none",
+                    color: linkHoverColor,
+                  }}
+                >
+                  {navItem.label}
+                </Box>
               </Link>
             </PopoverTrigger>
 
             {navItem.children && (
               <PopoverContent
                 border={0}
-                boxShadow={'xl'}
+                boxShadow={"xl"}
                 bg={popoverContentBgColor}
                 p={4}
-                fontSize={'18px'}
+                fontSize={"18px"}
                 fontWeight={400}
-                rounded={'xl'}
-                minW={'sm'}>
+                rounded={"xl"}
+                minW={"sm"}
+              >
                 <Stack>
                   {navItem.children.map((child) => (
                     <DesktopSubNav key={child.label} {...child} />
@@ -172,191 +158,196 @@ const DesktopNav = () => {
         </Box>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
-    <Link to= {href ?? '#'}>
-    <Box
-      
-      
-      role={'group'}
-      display={'block'}
-      p={2}
-      rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-      <Stack direction={'row'} align={'center'}>
-        <Box>
-          <Text
-            transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
-            fontSize={'18px'}
-            fontWeight={400}>
-            {label}
-          </Text>
-          <Text fontSize={'sm'}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={'all .3s ease'}
-          transform={'translateX(-10px)'}
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
-          align={'center'}
-          flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-        </Flex>
-      </Stack>
-    </Box>
+    <Link to={href ?? "#"}>
+      <Box
+        role={"group"}
+        display={"block"}
+        p={2}
+        rounded={"md"}
+        _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      >
+        <Stack direction={"row"} align={"center"}>
+          <Box>
+            <Text
+              transition={"all .3s ease"}
+              _groupHover={{ color: "pink.400" }}
+              fontSize={"18px"}
+              fontWeight={400}
+            >
+              {label}
+            </Text>
+            <Text fontSize={"sm"}>{subLabel}</Text>
+          </Box>
+          <Flex
+            transition={"all .3s ease"}
+            transform={"translateX(-10px)"}
+            opacity={0}
+            _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
+            justify={"flex-end"}
+            align={"center"}
+            flex={1}
+          >
+            <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          </Flex>
+        </Stack>
+      </Box>
     </Link>
-  )
-}
+  );
+};
 
 const MobileNav = () => {
   return (
-    <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
+    <Stack
+      bg={useColorModeValue("white", "gray.800")}
+      p={4}
+      display={{ md: "none" }}
+    >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
-  )
-}
+  );
+};
 
 const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        
-        href={href ?? '#'}
+        href={href ?? "#"}
         justifyContent="space-between"
         alignItems="center"
         _hover={{
-          textDecoration: 'none',
-        }}>
-        <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
+          textDecoration: "none",
+        }}
+      >
+        <Text
+          fontWeight={600}
+          color={useColorModeValue("gray.600", "gray.200")}
+        >
           {label}
         </Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
+            transition={"all .25s ease-in-out"}
+            transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
             h={6}
           />
         )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
-         
           pl={4}
           borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}>
+          borderStyle={"solid"}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          align={"start"}
+        >
           {children &&
             children.map((child) => (
-              <Box  key={child.label} py={2} href={child.href}>
+              <Box key={child.label} py={2} href={child.href}>
                 {child.label}
               </Box>
             ))}
         </Stack>
       </Collapse>
     </Stack>
-  )
-}
-
-
+  );
+};
 
 const NAV_ITEMS = [
   {
-    label : 'Home',
-    href : "/"
+    label: "Home",
+    href: "/",
   },
   {
-    label: 'Armor Car Rentals',
+    label: "Armor Car Rentals",
     children: [
       {
-        label: 'Armor Vehicle Rentals',
-        href: '#',
+        label: "Armor Vehicle Rentals",
+        href: "#",
       },
       {
-        label: 'Motorcade Services',
-        href: '#',
+        label: "Motorcade Services",
+        href: "#",
       },
       {
-        label: 'USA & International Coverage',
-        href: '#',
+        label: "USA & International Coverage",
+        href: "#",
       },
     ],
   },
   {
-    label: 'Armor Car Sales',
+    label: "Armor Car Sales",
     children: [
       {
-        label: 'New Vehicle Inventory',
-        href: '#',
+        label: "New Vehicle Inventory",
+        href: "/cars",
       },
       {
-        label: 'Preowned Vehicle Inventory',
-        href: '#',
+        label: "Preowned Vehicle Inventory",
+        href: "#",
       },
       {
-        label: 'Build to Order Services',
-        children:[
-            {
-                label : "Understanding Your Needs",
-                href : "#",
-            },
-            {
-                label : "Customization Your Cars",
-                href : "#",
-            },
-            {
-                label : "Buy or Rent",
-                href : "#",
-            },
-            {
-                label : "Ownership Support",
-                href : "#",
-            },
-            {
-                label : "Armorship Process",
-                href : "#",
-            },
-            {
-                label : "Protection Levl",
-                href : "#",
-            },
-        ]
+        label: "Build to Order Services",
+        children: [
+          {
+            label: "Understanding Your Needs",
+            href: "#",
+          },
+          {
+            label: "Customization Your Cars",
+            href: "#",
+          },
+          {
+            label: "Buy or Rent",
+            href: "#",
+          },
+          {
+            label: "Ownership Support",
+            href: "#",
+          },
+          {
+            label: "Armorship Process",
+            href: "#",
+          },
+          {
+            label: "Protection Levl",
+            href: "#",
+          },
+        ],
       },
     ],
   },
   {
-    label: 'Consulting & Aquasition',
+    label: "Consulting & Aquasition",
     children: [
       {
-        label: 'Armored Cash in Transit Vehicle',
-        href: '#',
+        label: "Armored Cash in Transit Vehicle",
+        href: "#",
       },
       {
-        label: 'Special Uses & Tencile Vehile',
-        href: '#',
+        label: "Special Uses & Tencile Vehile",
+        href: "#",
       },
       {
-        label: 'Cannabis Transport',
-        href: '#',
+        label: "Cannabis Transport",
+        href: "#",
       },
       {
-        label: 'Security Solutions',
-        href: '#',
+        label: "Security Solutions",
+        href: "#",
       },
     ],
   },
- 
-]
+];
