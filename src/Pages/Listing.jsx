@@ -1,14 +1,23 @@
-import { Flex, Box, Text, IconButton } from "@chakra-ui/react";
-import { FaPlay } from "react-icons/fa";
-import { useState } from "react";
+import { Box, Text } from "@chakra-ui/react";
 import VideoPlayer from "../Components/VideoPlayer";
+import Products from "../Components/Products";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Listing = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [apiData, setApiData] = useState(null);
 
-    const handlePlay = () => {
-      setIsPlaying(true);
-    };
+    useEffect(() => {
+      axios
+        .get("http://localhost:1337/api/listing-page?populate=*")
+        .then((response) => {
+          setApiData(response.data.data.attributes);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }, []);
+    
   return (
     <div>
       <Box backgroundColor={"white"}>
@@ -19,9 +28,8 @@ const Listing = () => {
           backgroundPosition="center center"
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
-          backgroundImage={
-            "https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-1-1.png"
-          }
+          backgroundImage=
+            {`http://localhost:1337${apiData && apiData.image.data.attributes.url}`}
         >
           <Text
             position="absolute"
@@ -32,10 +40,11 @@ const Listing = () => {
             color={"white"}
             textShadow={"2px 2px solid black"}
           >
-            NEW VEHICLE INVENTORY
+            {apiData && apiData.cover_title}
           </Text>
         </Box>
           <VideoPlayer/>
+          <Products/>
       </Box>
     </div>
   );

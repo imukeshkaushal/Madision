@@ -19,7 +19,6 @@ const Contact = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
-  console.log(apiData);
   return (
     <div>
       <Box backgroundColor={"white"} >
