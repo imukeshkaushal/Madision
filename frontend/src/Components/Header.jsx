@@ -22,6 +22,7 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
 
@@ -61,9 +62,9 @@ export default function Header() {
           color={useColorModeValue("gray.800", "white")}
         >
           <Image
-            w={"120px"}
-            height={"50px"}
-            src="https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/logo-1.png"
+            w={"132px"}
+            height={"62px"}
+            src="https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/New-Project.webp"
             alt="logo"
           />
         </Text>
@@ -115,7 +116,7 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={4} fontWeight={"400"}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
@@ -163,42 +164,41 @@ const DesktopNav = () => {
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
-    <Link to={href ?? "#"}>
-      <Box
-        role={"group"}
-        display={"block"}
-        p={2}
-        rounded={"md"}
-        _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
-      >
-        <Stack direction={"row"} align={"center"}>
-          <Box>
-            <Text
-              transition={"all .3s ease"}
-              _groupHover={{ color: "pink.400" }}
-              fontSize={"18px"}
-              fontWeight={400}
-            >
-              {label}
-            </Text>
-            <Text fontSize={"sm"}>{subLabel}</Text>
-          </Box>
-          <Flex
-            transition={"all .3s ease"}
-            transform={"translateX(-10px)"}
-            opacity={0}
-            _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-            justify={"flex-end"}
-            align={"center"}
-            flex={1}
-          >
-            <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
-          </Flex>
-        </Stack>
-      </Box>
-    </Link>
-  );
-};
+    <Box
+      as="a"
+      href={href}
+      role={'group'}
+      display={'block'}
+      p={2}
+    
+      rounded={'md'}
+      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      <Stack direction={'row'} align={'center'}  fontWeight = {"300"}>
+        <Box>
+          <Text
+            transition={'all .3s ease'}
+            _groupHover={{ color: 'pink.400' }}
+            fontWeight={400}>
+            {label}
+          </Text>
+          <Text fontSize={'sm'} fontWeight = {"400"}  >{subLabel}</Text>
+        </Box>
+        <Flex
+          transition={'all .3s ease'}
+          transform={'translateX(-10px)'}
+          opacity={0}
+          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+          justify={'flex-end'}
+          align={'center'}
+          flex={1}>
+          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+        </Flex>
+      </Stack>
+    </Box>
+  )
+}
+
+
 
 const MobileNav = () => {
   return (
@@ -267,62 +267,62 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Home",
+    label: "HOME",
     href: "/",
   },
   {
-    label: "Armor Car Rentals",
+    label: "ARMOR CAR RENTALS",
     children: [
       {
-        label: "Armor Vehicle Rentals",
-        href: "#",
+        label: "ARMOR VEHICLE RENTALS",
+        href: "/armor-vehile-rentals",
       },
       {
-        label: "Motorcade Services",
-        href: "#",
+        label: "MOTORCADE SERVICES",
+        href: "/motorcade-services",
       },
       {
-        label: "USA & International Coverage",
+        label: "USA & INTERNATIONAL COVERAGE",
         href: "#",
       },
     ],
   },
   {
-    label: "Armor Car Sales",
+    label: "ARMOR CAR SALES",
     children: [
       {
-        label: "New Vehicle Inventory",
+        label: "NEW VEHICLE INVENTORY",
         href: "/cars",
       },
       {
-        label: "Preowned Vehicle Inventory",
-        href: "#",
+        label: "PREOWNED VEHICLE INVENTORY",
+        href: "/preowned-vehicle-inventory",
       },
       {
-        label: "Build to Order Services",
+        label: "BUILD TO ORDER SERVICES",
         children: [
           {
-            label: "Understanding Your Needs",
+            label: "UNDERSTANDING YOUR NEEDS",
             href: "#",
           },
           {
-            label: "Customization Your Cars",
+            label: "CUSTOMIZING YOUR CARS",
             href: "#",
           },
           {
-            label: "Buy or Rent",
+            label: "BUY OR RENT",
             href: "#",
           },
           {
-            label: "Ownership Support",
+            label: "OWNERSHIP SUPPORT",
             href: "#",
           },
           {
-            label: "Armorship Process",
+            label: "ARMORSHIP PROCESS",
             href: "#",
           },
           {
-            label: "Protection Levl",
+            label: "PROTECTION & LEVEL",
             href: "#",
           },
         ],
@@ -330,22 +330,22 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Consulting & Aquasition",
+    label: "CONSULTING AND AQUASITION",
     children: [
       {
-        label: "Armored Cash in Transit Vehicle",
+        label: "ARMORED CASH IN TRANSIT VEHICLE",
         href: "#",
       },
       {
-        label: "Special Uses & Tencile Vehile",
+        label: "SPCECIAL USES AND TENCILE VEHICLE",
         href: "#",
       },
       {
-        label: "Cannabis Transport",
+        label: "CANNABIS SUPPORT",
         href: "#",
       },
       {
-        label: "Security Solutions",
+        label: "SECURITY SOLUTIONS",
         href: "#",
       },
     ],

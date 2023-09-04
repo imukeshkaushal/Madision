@@ -43,4 +43,28 @@
   margin: 10px 0px 20px 0px;
 }
 
+table {
+  border-collapse: collapse;
 
+  
+}
+
+td, th {
+
+  text-align: left;
+  padding: 8px;
+}
+
+.table_key{
+  font-size: 18px;
+  font-weight: 400;
+}
+.table_value{
+  font-size: 18px;
+  font-weight: 400;
+  color: gray;
+}
+
+/* .pagination_btn{
+  background-color: ;
+} */

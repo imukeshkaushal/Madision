@@ -70,6 +70,12 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "products"
+    },
+    "faq": {
+      "displayName": "faq",
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.faq"
     }
   }
 }

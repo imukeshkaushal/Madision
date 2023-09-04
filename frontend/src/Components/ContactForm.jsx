@@ -6,10 +6,13 @@ import {
   Textarea,
   Grid,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
 
+
 function ContactForm() {
+  const toast = useToast()
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
@@ -38,8 +41,22 @@ function ContactForm() {
     try {
       const response = await axios.post('http://localhost:1337/api/contact-forms', dataToSend);
       console.log('Form data submitted successfully:', response.data);
+      toast({
+        title: 'Form Filled Successfully',
+        description: "We Recieved You Data. We will get back soon. Thank You",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
     } catch (error) {
       console.error('Error submitting form data:', error);
+      toast({
+        title: 'Form Filled Error',
+        description: "There might be some problem. Please Try again later.",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
     }
   };
 

@@ -1,24 +1,26 @@
-import { Box, Image, Text, Flex, Button } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 
-const Products = () => {
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+
+const ArmorVehileRental = () => {
   const [apiData, setApiData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 2;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:1337/api/products`, {
+      .get(`http://localhost:1337/api/categories/3`, {
         params: {
-          populate: "*",
+          populate: "products.slider_img",
           "pagination[page]": currentPage,
           "pagination[pageSize]": itemsPerPage,
         },
       })
       .then((response) => {
-        setApiData(response.data.data);
+        setApiData(response.data.data.attributes.products.data);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -26,20 +28,46 @@ const Products = () => {
   }, [currentPage]);
 
   const totalPages = Math.ceil(apiData.length / itemsPerPage);
+
   return (
-    <Box>
-      <Flex
+    <div>
+      <Box backgroundColor={"white"}>
+        <Box
+          height="450px"
+          p={[4, 8, 12]}
+          position="relative"
+          backgroundPosition="center center"
+          backgroundRepeat="no-repeat"
+          backgroundSize="cover"
+          backgroundImage=
+            {"https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-1-1-1.webp"}
+        >
+          <Text
+            position="absolute"
+            top="50%"
+            left="50px"
+            fontSize={"48px"}
+            fontWeight={"bold"}
+            color={"white"}
+            textShadow={"2px 2px solid black"}
+          >
+            Armor Vehicle Rentals
+          </Text>
+        </Box>
+        <Flex
         direction={"column"}
         gap={"20px"}
         maxW={["95%", "95%", "90%"]}
         p={"5"}
         m={"auto"}
+        marginTop={12}
+        marginBottom={12}
         backgroundColor={"#F6F6F6"}
       >
-        {apiData &&
-          apiData.map((el) => {
-            return (
-              <Flex
+        {
+            apiData.map((el) => {
+                return(
+                    <Flex
                 gap={"20px"}
                 direction={["column", "column", "row"]}
                 key={el.id}
@@ -88,41 +116,54 @@ const Products = () => {
                   </Link>
                 </Box>
               </Flex>
-            );
-          })}
-      </Flex>
-      <Flex alignItems={"center"} justifyContent={"center"} gap={"20px"} mt={12} mb={12}> 
-        <Button
+                )
+            })
+        }
+        </Flex>
+        <Flex
+        alignItems={"center"}
+        justifyContent={"center"}
+        gap={"20px"}
+        mt={12}
+        mb={12}
+      >
+        <button
+          className="pagination_btn"
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 1}
-          variant={"none"}
-          fontWeight={"300"}
-          border={"1px solid black"}
-          borderRadius={"none"}
-          backgroundColor={"#051F16"}
-          color={"white"}
-          padding={"25px 40px"}
         >
-          Previous Page
-        </Button>
-        <Text>{currentPage}</Text>
-        
-        <Button
+          <Flex alignItems={"center"} gap={2}>
+            <ChevronLeftIcon />
+            <Text>Previous</Text>
+          </Flex>
+        </button>
+        <Text
+          backgroundColor={"#051F16"}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          height={"40px"}
+          width={"40px"}
+          color={"white"}
+          borderRadius={"50%"}
+        >
+          {currentPage}
+        </Text>
+
+        <button
           onClick={() => setCurrentPage(currentPage + 1)}
           disabled={currentPage === totalPages}
-          color={"white"}
-          variant={"none"}
-          fontWeight={"300"}
-          border={"1px solid black"}
-          borderRadius={"none"}
-          backgroundColor={"#051F16"}
-          padding={"25px 40px"}
         >
-          Next Page
-        </Button>
+          <Flex alignItems={"center"} >
+            <Text>Next</Text>
+            <ChevronRightIcon />
+          </Flex>
+        </button>
       </Flex>
-    </Box>
+      </Box>
+      
+    </div>
   );
 };
 
-export default Products;
+export default ArmorVehileRental;

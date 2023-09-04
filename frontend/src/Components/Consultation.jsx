@@ -41,7 +41,7 @@ const Consultation = () => {
       )}
 
       <Box
-        height={["1650px", "1300px", "800px", "800px", "800px"]}
+        height={"auto"}
         width={["100%", "100%", "55%"]}
         ml={["none", "none", "45%"]}
         p={4}

@@ -8,6 +8,7 @@ import axios from "axios";
 import Consultation from "../Components/Consultation";
 import Customization from "../Components/Customization";
 
+
 const Home = () => {
   const [apiData, setApiData] = useState(null);
 
@@ -29,7 +30,7 @@ const Home = () => {
         <>
         <Box backgroundColor={"white"}>
           <Flex
-            gap="30px"
+            gap={["none","30px","30px"]}
             maxWidth={["100%", "95%", "90%"]}
             m={"auto"}
             pt={12}
@@ -38,7 +39,7 @@ const Home = () => {
             <Flex
               width={["100%", "100%", "60%"]}
               direction="column"
-              gap={"30px"}
+              gap={["none","30px","30px"]}
             >
               <Box
                 height="500px"
@@ -47,7 +48,7 @@ const Home = () => {
                 backgroundPosition="bottom center"
                 backgroundRepeat="no-repeat"
                 backgroundSize="cover"
-                bgImage="url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-3-1-1.png')"
+                bgImage="url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-3-1-1.webp')"
               >
                 <Text
                   fontSize={["50px", "60px", "60px"]}
@@ -89,9 +90,9 @@ const Home = () => {
                 backgroundRepeat="no-repeat"
                 backgroundSize="cover"
                 bgImage={[
-                  "url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/Group-554.jpg')",
-                  "url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim.png')",
-                  "url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim.png')",
+                  "url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/Group-554.webp')",
+                  "url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-6.webp')",
+                  "url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/imgpsh_fullsize_anim-6.webp')",
                 ]}
               >
                 <Text
@@ -133,7 +134,7 @@ const Home = () => {
               backgroundPosition="bottom center"
               backgroundRepeat="no-repeat"
               backgroundSize="cover"
-              bgImage="url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/07/Group-552.jpg')"
+              bgImage="url('https://madisonavenuearmor.com/new/wp-content/uploads/2023/08/Group-552.webp')"
               p={[4, 8, 12]}
             >
               {/* Your content goes here */}
